@@ -91,6 +91,22 @@ const buildStaticSite = async () => {
           </div>
         </section>
       </div>
+      
+      <!-- Inline critical styles for homepage cards and tags (ensures Pages static HTML matches app styles) -->
+      <style>
+        .posts-grid { display: grid; gap: 2rem; margin-bottom: 3rem; }
+        .post-card { background: #fff; border: 1px solid var(--color-border-muted); border-radius: var(--radius-2xl); padding: 1.5rem; box-shadow: var(--shadow-sm); }
+        .post-card h2 { margin-bottom: 0.75rem; }
+        .post-card h2 a { color: var(--color-text-primary); text-decoration: none; font-weight: 700; }
+        .post-meta { display: flex; gap: 1rem; margin-bottom: 1rem; color: var(--color-text-tertiary); font-size: 0.9rem; }
+        .post-excerpt { margin-bottom: 1rem; color: var(--color-text-secondary); }
+        .post-card footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border-muted); }
+        .read-more { color: var(--color-accent-primary); background: var(--color-accent-subtle); text-decoration: none; font-weight: 600; padding: 0.4rem 0.8rem; border: 1px solid var(--color-accent-primary); border-radius: 0.5rem; }
+        .read-more:hover { background: var(--color-accent-primary); color: #fff; }
+        .reading-time { font-size: 0.8rem; color: var(--color-text-muted); }
+        .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .tag { display: inline-block; background: var(--blue-50); color: var(--blue-700); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--blue-200); letter-spacing: 0.025em; }
+      </style>
     `
     
     const homeHtml = baseLayout(homeContent, {
