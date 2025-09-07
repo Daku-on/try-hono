@@ -15,6 +15,18 @@ import { baseLayout, postTemplate, postListTemplate } from './templates/layout.j
 
 const app = new Hono()
 
+// Disable caching for HTML responses (Pages Functions)
+app.use('*', async (c, next) => {
+  await next()
+  const ct = c.res?.headers?.get('content-type') || ''
+  if (ct.includes('text/html')) {
+    c.header('Cache-Control', 'no-store, max-age=0, must-revalidate')
+    c.header('Pragma', 'no-cache')
+    c.header('Expires', '0')
+    c.header('Surrogate-Control', 'no-store')
+  }
+})
+
 // 静的ファイル配信
 app.use('/static/*', serveStatic({ root: './' }))
 
