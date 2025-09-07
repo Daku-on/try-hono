@@ -360,6 +360,27 @@ export const baseLayout = (content, meta = {}) => `
             font-size: var(--text-base);
         }
         
+        /* Tags row under excerpts */
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+        }
+        
+        .tag {
+            display: inline-block;
+            background: var(--blue-50);
+            color: var(--blue-700);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-xl);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            border: 1px solid var(--blue-200);
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+        }
+        
         .post-card footer {
             display: flex;
             justify-content: space-between;
