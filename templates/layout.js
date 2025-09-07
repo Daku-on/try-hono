@@ -41,31 +41,48 @@ export const baseLayout = (content, meta = {}) => `
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
+            min-height: 60px;
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             text-decoration: none;
             color: #ff6b35;
+            flex-shrink: 0;
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
         
         .nav-links a {
             text-decoration: none;
             color: #666;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            white-space: nowrap;
         }
         
         .nav-links a:hover {
             color: #ff6b35;
+        }
+        
+        /* モバイルメニューボタン（必要に応じて表示） */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
         }
         
         main {
@@ -99,32 +116,89 @@ export const baseLayout = (content, meta = {}) => `
             opacity: 0.9;
         }
         
-        /* モバイル対応の改善 */
-        @media (max-width: 1024px) {
+        /* デスクトップファーストデザイン - 大画面向け最適化 */
+        @media (min-width: 1200px) {
             .container {
-                padding: 0 15px;
+                max-width: 1000px;
+                padding: 0 30px;
             }
-        }
-        
-        @media (max-width: 768px) {
+            
             nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem 0;
+                padding: 1.5rem 0;
             }
             
             .logo {
-                font-size: 1.3rem;
+                font-size: 1.8rem;
             }
             
             .nav-links {
-                gap: 1.5rem;
+                gap: 3rem;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* タブレット対応 */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                gap: 2rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* 小さなタブレット・大きなモバイル */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            /* ナビゲーションを縦並びに変更 */
+            nav {
+                flex-direction: column;
+                gap: 1.2rem;
+                padding: 1rem 0;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .nav-links {
+                gap: 1.8rem;
                 flex-wrap: wrap;
                 justify-content: center;
+                width: 100%;
             }
             
             .nav-links a {
                 font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+                border-radius: 20px;
+                background: rgba(255, 107, 53, 0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links a:hover {
+                background: #ff6b35;
+                color: white;
             }
             
             .hero {
@@ -143,7 +217,7 @@ export const baseLayout = (content, meta = {}) => `
             }
             
             main {
-                padding: 1rem 0;
+                padding: 1.5rem 0;
             }
             
             footer {
@@ -152,18 +226,33 @@ export const baseLayout = (content, meta = {}) => `
             }
         }
         
+        /* モバイル縦向き */
         @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            
             nav {
                 padding: 0.8rem 0;
+                gap: 1rem;
             }
             
             .logo {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .nav-links {
                 gap: 1rem;
-                font-size: 0.85rem;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+                display: block;
+                text-align: center;
+                margin: 0.2rem 0;
             }
             
             .hero {
@@ -178,8 +267,8 @@ export const baseLayout = (content, meta = {}) => `
                 font-size: 0.9rem;
             }
             
-            .container {
-                padding: 0 10px;
+            main {
+                padding: 1rem 0;
             }
         }
     </style>
@@ -349,24 +438,59 @@ export const postTemplate = (post) => `
         color: white;
     }
     
-    @media (max-width: 1024px) {
+    /* デスクトップ向け記事ページ最適化 */
+    @media (min-width: 1200px) {
         .post-detail {
-            padding: 1.75rem;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
         }
         
         .post-title {
-            font-size: 2.2rem;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .post-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .post-content h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.25rem;
+        }
+        
+        .post-content h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+        }
+    }
+    
+    @media (max-width: 1024px) {
+        .post-detail {
+            padding: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .post-title {
+            font-size: 2.4rem;
+        }
+        
+        .post-content {
+            font-size: 1.1rem;
         }
     }
     
     @media (max-width: 768px) {
         .post-detail {
-            padding: 1.25rem;
+            padding: 1.5rem;
             margin: 0 0.5rem 1.5rem;
         }
         
         .post-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             line-height: 1.2;
             margin-bottom: 1.25rem;
         }
@@ -374,7 +498,7 @@ export const postTemplate = (post) => `
         .post-meta {
             flex-direction: column;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         .post-tags {
@@ -387,39 +511,42 @@ export const postTemplate = (post) => `
         }
         
         .post-content h2 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 0.75rem;
+            font-size: 1.5rem;
+            margin: 1.8rem 0 0.8rem;
         }
         
         .post-content h3 {
-            font-size: 1.2rem;
-            margin: 1.25rem 0 0.75rem;
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
         }
         
         .post-content pre {
-            font-size: 0.85rem;
-            padding: 0.75rem;
+            font-size: 0.9rem;
+            padding: 1rem;
             overflow-x: auto;
+            border-radius: 6px;
         }
         
         .back-link {
             font-size: 0.9rem;
-            padding: 0.6rem 1rem;
+            padding: 0.7rem 1.2rem;
         }
     }
     
     @media (max-width: 480px) {
         .post-detail {
-            padding: 1rem;
+            padding: 1.25rem;
             margin: 0 0.25rem 1rem;
         }
         
         .post-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            line-height: 1.3;
         }
         
         .post-content {
             font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         .post-content h2 {
@@ -427,14 +554,24 @@ export const postTemplate = (post) => `
         }
         
         .post-content h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+        }
+        
+        .post-content pre {
+            font-size: 0.85rem;
+            padding: 0.8rem;
         }
         
         .tag {
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.7rem;
             margin-right: 0.4rem;
             margin-bottom: 0.4rem;
+        }
+        
+        .back-link {
+            font-size: 0.85rem;
+            padding: 0.6rem 1rem;
         }
     }
 </style>
@@ -612,9 +749,63 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
         padding: 3rem;
     }
     
-    @media (max-width: 1024px) {
+    /* デスクトップ向けブログ一覧最適化 */
+    @media (min-width: 1200px) {
+        .posts-grid {
+            gap: 2.5rem;
+        }
+        
         .post-card {
-            padding: 1.25rem;
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .post-card h2 a {
+            font-size: 1.6rem;
+            line-height: 1.3;
+        }
+        
+        .post-content {
+            font-size: 1.1rem;
+        }
+        
+        .post-meta {
+            font-size: 1rem;
+            gap: 1.5rem;
+        }
+        
+        .pagination {
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .pagination a,
+        .pagination .disabled {
+            font-size: 1.1rem;
+            padding: 0.7rem 1.5rem;
+        }
+    }
+    
+    @media (max-width: 1024px) {
+        .posts-grid {
+            gap: 2rem;
+        }
+        
+        .post-card {
+            padding: 1.8rem;
+        }
+        
+        .post-card h2 a {
+            font-size: 1.4rem;
+        }
+        
+        .post-meta {
+            font-size: 0.95rem;
         }
     }
     
@@ -624,47 +815,67 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
         }
         
         .post-card {
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 0;
         }
         
         .post-card h2 a {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1.3;
         }
         
         .post-meta {
             flex-direction: column;
-            gap: 0.5rem;
-            font-size: 0.85rem;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+        }
+        
+        .post-excerpt {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         .post-card footer {
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.8rem;
             align-items: flex-start;
         }
         
         .pagination {
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
+            align-items: center;
         }
         
         .pagination a,
         .pagination .disabled {
-            width: 100%;
+            min-width: 180px;
             text-align: center;
-            max-width: 200px;
+            padding: 0.8rem 1.2rem;
+        }
+        
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
         }
     }
     
     @media (max-width: 480px) {
+        .posts-grid {
+            gap: 1.25rem;
+        }
+        
         .post-card {
-            padding: 0.75rem;
+            padding: 1.25rem;
         }
         
         .post-card h2 a {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            line-height: 1.4;
+        }
+        
+        .post-meta {
+            font-size: 0.85rem;
         }
         
         .post-excerpt {
@@ -674,7 +885,24 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
         
         .tag {
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.6rem;
+            margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .pagination a,
+        .pagination .disabled {
+            min-width: 150px;
+            font-size: 0.9rem;
+            padding: 0.7rem 1rem;
+        }
+        
+        .read-more {
+            font-size: 0.85rem;
+        }
+        
+        .reading-time {
+            font-size: 0.75rem;
         }
     }
 </style>
