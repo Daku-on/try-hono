@@ -10,6 +10,64 @@ export const baseLayout = (content, meta = {}) => `
     <meta name="description" content="${meta.description || 'Honoで作った超高速ブログ'}">
     ${meta.ogTags || ''}
     <style>
+        /* 🎨 Modern Blog Color System - WCAG AA Compliant */
+        :root {
+            /* Primary Colors */
+            --primary-50: #fef2f2;
+            --primary-100: #fee2e2;
+            --primary-500: #ef4444;
+            --primary-600: #dc2626;
+            --primary-700: #b91c1c;
+            
+            /* Neutral Colors - High Contrast */
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-300: #d4d4d4;
+            --neutral-400: #a3a3a3;
+            --neutral-500: #737373;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --neutral-800: #262626;
+            --neutral-900: #171717;
+            --neutral-950: #0a0a0a;
+            
+            /* Orange Accent (Hono Brand) */
+            --orange-50: #fff7ed;
+            --orange-100: #ffedd5;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+            --orange-700: #c2410c;
+            
+            /* Success/Info Colors */
+            --emerald-50: #ecfdf5;
+            --emerald-100: #d1fae5;
+            --emerald-600: #059669;
+            --emerald-700: #047857;
+            
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-200: #bfdbfe;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            
+            /* Semantic Colors */
+            --text-primary: var(--neutral-900);
+            --text-secondary: var(--neutral-700);
+            --text-tertiary: var(--neutral-600);
+            --text-muted: var(--neutral-500);
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: var(--neutral-50);
+            --bg-tertiary: var(--neutral-100);
+            
+            --border-light: var(--neutral-200);
+            --border-medium: var(--neutral-300);
+            
+            --accent-primary: var(--orange-600);
+            --accent-hover: var(--orange-700);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +75,11 @@ export const baseLayout = (content, meta = {}) => `
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f9f9f9;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            font-size: 16px;
         }
         
         .container {
@@ -30,27 +89,26 @@ export const baseLayout = (content, meta = {}) => `
         }
         
         header {
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 0;
-            min-height: 60px;
+            padding: 1.5rem 0;
+            min-height: 70px;
         }
         
         .logo {
             font-size: 1.6rem;
-            font-weight: bold;
+            font-weight: 700;
             text-decoration: none;
-            color: #ff6b35;
+            color: var(--accent-primary);
             flex-shrink: 0;
+            letter-spacing: -0.025em;
         }
         
         .nav-links {
@@ -63,16 +121,33 @@ export const baseLayout = (content, meta = {}) => `
         
         .nav-links a {
             text-decoration: none;
-            color: #666;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 1rem;
             padding: 0.5rem 0;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
             white-space: nowrap;
+            position: relative;
         }
         
         .nav-links a:hover {
-            color: #ff6b35;
+            color: var(--accent-primary);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-links a:hover:after {
+            transform: scaleX(1);
         }
         
         /* モバイルメニューボタン（必要に応じて表示） */
@@ -81,7 +156,7 @@ export const baseLayout = (content, meta = {}) => `
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #666;
+            color: var(--text-muted);
             cursor: pointer;
         }
         
@@ -91,29 +166,56 @@ export const baseLayout = (content, meta = {}) => `
         }
         
         footer {
-            background: #333;
-            color: #fff;
+            background: var(--neutral-900);
+            color: var(--neutral-100);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             margin-top: 4rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+            color: var(--neutral-300);
         }
         
         .hero {
             text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--blue-600) 0%, var(--accent-primary) 100%);
             color: white;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+        }
+        
+        .hero * {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
             font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 1rem;
+            letter-spacing: -0.025em;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             opacity: 0.9;
+            font-weight: 400;
         }
         
         /* デスクトップファーストデザイン - 大画面向け最適化 */
@@ -376,13 +478,21 @@ export const postTemplate = (post) => `
     
     .tag {
         display: inline-block;
-        background: #e1f5fe;
-        color: #0277bd;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
+        background: var(--blue-100);
+        color: var(--blue-700);
+        padding: 0.3rem 0.8rem;
+        border-radius: 16px;
         font-size: 0.8rem;
+        font-weight: 500;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
+        border: 1px solid var(--blue-200);
+    }
+    
+    .tag:hover {
+        background: var(--blue-700);
+        color: white;
     }
     
     .post-content {
@@ -641,45 +751,52 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
     }
     
     .post-card {
-        background: white;
-        border-radius: 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
         padding: 1.5rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
     }
     
     .post-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border-color: var(--border-medium);
     }
     
     .post-card h2 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
     }
     
     .post-card h2 a {
-        color: #222;
+        color: var(--text-primary);
         text-decoration: none;
         font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.3;
+        transition: color 0.2s ease;
     }
     
     .post-card h2 a:hover {
-        color: #ff6b35;
+        color: var(--accent-primary);
     }
     
     .post-meta {
         display: flex;
         gap: 1rem;
         margin-bottom: 1rem;
-        font-size: 0.9rem;
-        color: #666;
+        font-size: 0.875rem;
+        color: var(--text-tertiary);
         flex-wrap: wrap;
+        font-weight: 500;
     }
     
     .post-excerpt {
         margin-bottom: 1rem;
-        color: #555;
+        color: var(--text-secondary);
         line-height: 1.6;
+        font-size: 1rem;
     }
     
     .post-card footer {
@@ -692,18 +809,27 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
     }
     
     .read-more {
-        color: #ff6b35;
+        color: var(--accent-primary);
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--accent-primary);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        display: inline-block;
     }
     
     .read-more:hover {
-        text-decoration: underline;
+        background: var(--accent-primary);
+        color: white;
+        text-decoration: none;
     }
     
     .reading-time {
         font-size: 0.8rem;
-        color: #888;
+        color: var(--text-muted);
+        font-weight: 500;
     }
     
     .pagination {
