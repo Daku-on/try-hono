@@ -86,7 +86,7 @@ const buildStaticSite = async () => {
           <div class="tags">
             <h3>🏷️ タグ</h3>
             <div class="tag-cloud">
-              ${tags.slice(0, 10).map(tag => `<a href="/tag/${encodeURIComponent(tag)}" class="tag-link">#${tag}</a>`).join('')}
+              ${tags.slice(0, 10).map(tag => `<a href="/tag/${encodeURIComponent(tag)}" class="tag">#${tag}</a>`).join('')}
             </div>
           </div>
         </section>
@@ -105,7 +105,8 @@ const buildStaticSite = async () => {
         .read-more:hover { background: var(--color-accent-primary); color: #fff; }
         .reading-time { font-size: 0.8rem; color: var(--color-text-muted); }
         .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-        .tag { display: inline-block; background: var(--blue-50); color: var(--blue-700); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--blue-200); letter-spacing: 0.025em; }
+        .tag { display: inline-block; background: var(--blue-50); color: var(--blue-700); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--blue-200); letter-spacing: 0.025em; text-transform: uppercase; }
+        .tag:hover { background: var(--blue-600); color: var(--color-text-inverse); border-color: var(--blue-600); }
       </style>
     `
     
