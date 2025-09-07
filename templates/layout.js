@@ -564,6 +564,9 @@ export const postTemplate = (post) => `
     
     .post-tags {
         margin-bottom: var(--space-8);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
     }
     
     .tag {
@@ -574,8 +577,8 @@ export const postTemplate = (post) => `
         border-radius: var(--radius-xl);
         font-size: var(--text-xs);
         font-weight: 600;
-        margin-right: var(--space-2);
-        margin-bottom: var(--space-2);
+        margin-right: 0; /* spacing handled by .post-tags gap */
+        margin-bottom: 0; /* spacing handled by .post-tags gap */
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid var(--blue-200);
         letter-spacing: 0.025em;
@@ -892,6 +895,27 @@ export const postListTemplate = (posts, pagination = null, title = 'ブログ記
         color: var(--color-text-secondary);
         line-height: var(--leading-normal);
         font-size: var(--text-base);
+    }
+    
+    /* Tags under excerpt */
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+    }
+    
+    .tag {
+        display: inline-block;
+        background: var(--blue-50);
+        color: var(--blue-700);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-xl);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        border: 1px solid var(--blue-200);
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
     }
     
     .post-card footer {

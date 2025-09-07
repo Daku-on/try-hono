@@ -135,6 +135,37 @@ const buildStaticSite = async () => {
     
     await fs.writeFile('dist/_routes.json', JSON.stringify(routes, null, 2))
     
+    // Custom headers (Cloudflare Pages) - disable caching for HTML pages
+    const headers = `
+/*
+  X-Content-Type-Options: nosniff
+
+/*.html
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/blog
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/blog/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/category/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/tag/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/search
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/categories
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/tags
+  Cache-Control: no-store, max-age=0, must-revalidate
+`
+    await fs.writeFile('dist/_headers', headers)
+    
     // Cloudflare Pages Functions用のエントリーポイント
     const functionsCode = `
 import app from '../index.js'
