@@ -420,6 +420,28 @@ export const baseLayout = (content, meta = {}) => `
             font-weight: 500;
         }
         
+        /* Category badges */
+        .category-badge {
+            display: inline-block;
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+            padding: var(--space-2) var(--space-3);
+            margin: var(--space-1) var(--space-1) var(--space-1) 0;
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid var(--neutral-200);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .category-badge:hover {
+            background: var(--neutral-700);
+            color: var(--color-text-inverse);
+            border-color: var(--neutral-700);
+            transform: translateY(-1px);
+        }
+        
         /* デスクトップファーストデザイン - 大画面向け最適化 */
         @media (min-width: 1200px) {
             .container {

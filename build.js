@@ -80,7 +80,7 @@ const buildStaticSite = async () => {
           <div class="categories">
             <h3>📁 カテゴリ</h3>
             <div class="category-list">
-              ${categories.map(cat => `<a href="/category/${encodeURIComponent(cat)}" class="category-link">${cat}</a>`).join('')}
+              ${categories.map(cat => `<a href="/category/${encodeURIComponent(cat)}" class="category-badge">${cat}</a>`).join('')}
             </div>
           </div>
           <div class="tags">
@@ -107,6 +107,8 @@ const buildStaticSite = async () => {
         .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
         .tag { display: inline-block; background: var(--blue-50); color: var(--blue-700); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--blue-200); letter-spacing: 0.025em; text-transform: uppercase; }
         .tag:hover { background: var(--blue-600); color: var(--color-text-inverse); border-color: var(--blue-600); }
+        .category-badge { display: inline-block; background: var(--neutral-100); color: var(--neutral-700); padding: 0.25rem 0.75rem; margin: 0.25rem 0.25rem 0.25rem 0; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; text-decoration: none; border: 1px solid var(--neutral-200); }
+        .category-badge:hover { background: var(--neutral-700); color: var(--color-text-inverse); border-color: var(--neutral-700); }
       </style>
     `
     
