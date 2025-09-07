@@ -49,6 +49,19 @@ npm run dev
 npm run build
 ```
 
+## 🚀 デプロイ（Cloudflare Pages）
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- 生成物: `dist/index.html`, `dist/blog/**`, `dist/posts/**`, `dist/templates/**`, `_redirects`, `_routes.json`, `_headers`
+- HTMLキャッシュ無効化: `_headers` とアプリのミドルウェア（`index.js`）で `Cache-Control: no-store` を付与。変更が即時反映されます。
+- 反映が遅い場合: Pagesの「Purge cache」を実行、またはURLに `?v=now` 等のクエリを付与して確認。
+
+## 🔧 実装メモ
+
+- ホーム/一覧カードの見た目はテンプレート共通スタイル（`templates/layout.js`）で定義。
+- 「続きを読む」ボタンやタグチップの余白は `.read-more`, `.post-tags .tag` で調整可能。
+
 ## 📊 プロジェクト構成
 
 ```
