@@ -59,8 +59,22 @@ npm run build
 
 ## 🔧 実装メモ
 
+### スタイリング
 - ホーム/一覧カードの見た目はテンプレート共通スタイル（`templates/layout.js`）で定義。
 - 「続きを読む」ボタンやタグチップの余白は `.read-more`, `.post-tags .tag` で調整可能。
+
+### デザインシステム（2025年実装）
+- **フォント**: Inter Variable Font（Google Fonts）
+- **タイポグラフィ**: 1.25比率の数学的スケール（Perfect Fourth）
+- **色彩**: WCAG AA準拠の高コントラスト設計（4.5:1以上）
+- **デザイントークン**: CSS カスタムプロパティで一元管理
+- **スペーシング**: 0.25rem基準の8の倍数システム
+
+### 本番・開発環境の差異対応
+- **重要**: `build.js` のHTMLクラス名と `templates/layout.js` のCSSセレクタを一致させる必要があります
+- タグ: `class="tag"` と `.tag { ... }` で統一
+- カテゴリ: `class="category-badge"` と `.category-badge { ... }` で統一
+- `build.js` にはインラインCSSも含めて本番ビルド時のスタイル適用を保証
 
 ## 📊 プロジェクト構成
 
